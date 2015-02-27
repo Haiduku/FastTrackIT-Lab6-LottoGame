@@ -7,6 +7,8 @@ public class LottoV1 {
     private static final int MAXVALUE = 49;
     private static final int MAX_EXTRACTION_NUMBERS = 6;
     private static final int WINNINGS = 8645659;
+    private static final int WINNINGS_2ND_CAT = 19113;
+    private static final int WINNINGS_3RD_CAT = 257;
     private static final int TICKET_PRICE = 5;
 
     public static void main(String[] args) {
@@ -17,6 +19,8 @@ public class LottoV1 {
         int tentatives = 0;
         double starttime = System.currentTimeMillis();
         int investedMoney = 0;
+        int secondCategory = 0;
+        int thirdCategory = 0;
 
         //  prepare the lotto machine and init it
         Random lottoMachine = new Random();
@@ -47,21 +51,17 @@ public class LottoV1 {
                     }
                 }
 
-//            switch (howManyWons) {
-//
-//                case 4: // that is 4 numbers
-//                    System.out.println("congrat, you won at 3rd category");
-//                    break;
-//                case 5: // that is 5 numbers
-//                    System.out.println("congrats, you won at 2rd category");
-//                    break;
-//                case 6: // that is 6 numbers
-//                    System.out.println("WOW, you won at 1st category");
-//                    break;
-//                default:
-//                    System.out.println("you are a looser, but keep trying, you guessed " + howManyWons + " numbers");
-//                    break;
-//            }
+            switch (howManyWons) {
+
+                case 4: // that is 4 numbers
+                    thirdCategory++;
+                    break;
+                case 5: // that is 5 numbers
+                    secondCategory++;
+                    break;
+
+
+            }
             tentatives++;
         } while (howManyWons != 6);
 
@@ -81,9 +81,11 @@ public class LottoV1 {
             if (wonNumbers[i] != 0)
                 System.out.print(wonNumbers[i] + " |");
         System.out.println("\nNumber of trials: " + tentatives);
+        System.out.println("Times won at the 2nd Category: " +secondCategory);
+        System.out.println("Times won at the 3rd Category: " +thirdCategory);
         System.out.println("Elapsed time: " + time+ " s");
         System.out.println("Invested money: " + investedMoney + " RON");
-        System.out.println("Overall gain:" + (WINNINGS - investedMoney)+ " RON");
+        System.out.println("Overall gain:" + ((WINNINGS + WINNINGS_2ND_CAT * secondCategory + WINNINGS_3RD_CAT *thirdCategory )- investedMoney)+ " RON");
     }
 
     private static int[] extractSixUniqueNumbers(Random lottoMachine) {
