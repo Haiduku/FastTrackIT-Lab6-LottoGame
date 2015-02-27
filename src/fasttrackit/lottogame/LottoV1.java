@@ -6,6 +6,8 @@ public class LottoV1 {
 
     private static final int MAXVALUE = 49;
     private static final int MAX_EXTRACTION_NUMBERS = 6;
+    private static final int WINNINGS = 8645659;
+    private static final int TICKET_PRICE = 5;
 
     public static void main(String[] args) {
 
@@ -13,7 +15,8 @@ public class LottoV1 {
         int howManyWons = 0;
         int[] wonNumbers = new int[MAX_EXTRACTION_NUMBERS];
         int tentatives = 0;
-        long starttime = System.currentTimeMillis();
+        double starttime = System.currentTimeMillis();
+        int investedMoney = 0;
 
         //  prepare the lotto machine and init it
         Random lottoMachine = new Random();
@@ -62,8 +65,9 @@ public class LottoV1 {
             tentatives++;
         } while (howManyWons != 6);
 
-        long endTime = System.currentTimeMillis();
-        long time = (endTime - starttime) / 1000;
+        double endTime = System.currentTimeMillis();
+        double time = (endTime - starttime) / 1000;
+        investedMoney = TICKET_PRICE * tentatives;
 
         // 3 print the extraction
         System.out.println("here is the extraction today:");
@@ -72,12 +76,14 @@ public class LottoV1 {
         System.out.println("");
 
 
-        System.out.println("here is what you won: ");
+        System.out.println("here is what you won:" +WINNINGS);
         for (int i = 0; i < MAX_EXTRACTION_NUMBERS; i++)
             if (wonNumbers[i] != 0)
                 System.out.print(wonNumbers[i] + " |");
-        System.out.println("\nNumar de incercari: " + tentatives);
-        System.out.println("Timp necesar: " + time);
+        System.out.println("\nNumber of trials: " + tentatives);
+        System.out.println("Elapsed time: " + time+ " s");
+        System.out.println("Invested money: " + investedMoney + " RON");
+        System.out.println("Overall gain:" + (WINNINGS - investedMoney)+ " RON");
     }
 
     private static int[] extractSixUniqueNumbers(Random lottoMachine) {
