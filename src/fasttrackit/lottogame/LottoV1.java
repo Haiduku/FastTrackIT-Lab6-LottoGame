@@ -13,7 +13,7 @@ public class LottoV1 {
         int howManyWons = 0;
         int[] wonNumbers = new int[MAX_EXTRACTION_NUMBERS];
         int tentatives = 0;
-        long starttime = System.currentTimeMillis();
+        double starttime = System.currentTimeMillis();
 
         //  prepare the lotto machine and init it
         Random lottoMachine = new Random();
@@ -62,8 +62,8 @@ public class LottoV1 {
             tentatives++;
         } while (howManyWons != MAX_EXTRACTION_NUMBERS);
 
-        long endTime = System.currentTimeMillis();
-        long time = (endTime - starttime) / 1000;
+        double endTime = System.currentTimeMillis();
+        double time = (endTime - starttime) / 1000;
 
         // 3 print the extraction
         System.out.println("here is the extraction today:");
