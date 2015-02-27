@@ -34,98 +34,106 @@ public class LottoV1 {
         Random lottoMachine = new Random();
         lottoMachine.setSeed(System.currentTimeMillis());
         // 2 generate the numbers
-        int[] sixGeneratedNumbers = extragereLoto6din49(lottoMachine);
-
-
+        int[] sixGeneratedNumbers;
         do {
-            int[] myNumbers = new int[MAX_EXTRACTION_NUMBERS];
-            Random myNumbersMachine = new Random();
-
-            for (int i = 0; i < MAX_EXTRACTION_NUMBERS; i++) {
-                int nr = myNumbersMachine.nextInt(MAXVALUE) + 1;
-                //check if nr is not already in the array, if it is generate a new one
-                for (int j = 0; j < i; j++)
-                    if (myNumbers[j] == nr) nr = myNumbersMachine.nextInt(MAXVALUE) + 1;
-                myNumbers[i] = nr;
-            }
-            // here are my numbers
-            System.out.println("here are my numbers:");
-            for (int i = 0; i < MAX_EXTRACTION_NUMBERS; i++)
-                System.out.print(myNumbers[i] + " |");
-
-            System.out.println("");
-
-
-
-
-
-            //compare and tell if won
-
-
-
-            for (int i = 0; i < MAX_EXTRACTION_NUMBERS; i++)
-                for (int j = 0; j < MAX_EXTRACTION_NUMBERS; j++) {
-
-                    if (myNumbers[i] == sixGeneratedNumbers[j]) {
-                        howManyWons++;
-                        wonNumbers[howManyWons - 1] = sixGeneratedNumbers[j];
-                    }
-                }
-
-            switch (howManyWons) {
-
-                case 4: // that is 4 numbers
-                    System.out.println("congrat, you won at 3rd category");
-                    break;
-                case 5: // that is 5 numbers
-                    System.out.println("congrat, you won at 2rd category");
-                    break;
-                case 6: // that is 6 numbers
-                    System.out.println("WOW, you won at 1st category");
-                    break;
-                default:
-                    System.out.println("you are a looser, but keep trying, you guessed " + howManyWons + " numbers");
-                    break;
-            }
+            sixGeneratedNumbers = extragereLoto6din49(lottoMachine);
+        } while (
+                sixGeneratedNumbers[0] != sixGeneratedNumbers[1] && sixGeneratedNumbers[0] != sixGeneratedNumbers[2] &&
+        sixGeneratedNumbers[0] != sixGeneratedNumbers[3] && sixGeneratedNumbers[0] != sixGeneratedNumbers[4] &&
+        sixGeneratedNumbers[0] != sixGeneratedNumbers[5] && sixGeneratedNumbers[1] != sixGeneratedNumbers[2] &&
+        sixGeneratedNumbers[1] != sixGeneratedNumbers[3] && sixGeneratedNumbers[1] != sixGeneratedNumbers[4] &&
+        sixGeneratedNumbers[1] != sixGeneratedNumbers[5] && sixGeneratedNumbers[2] != sixGeneratedNumbers[3] &&
+        sixGeneratedNumbers[2] != sixGeneratedNumbers[4] && sixGeneratedNumbers[2] != sixGeneratedNumbers[5] &&
+        sixGeneratedNumbers[3] != sixGeneratedNumbers[4] && sixGeneratedNumbers[3] != sixGeneratedNumbers[5] &&
+        sixGeneratedNumbers[4] != sixGeneratedNumbers[5]);
         tentatives++;
-        }while(howManyWons < 5);
+
+//        do {
+//            int[] myNumbers = new int[MAX_EXTRACTION_NUMBERS];
+//            Random myNumbersMachine = new Random();
+//
+//            for (int i = 0; i < MAX_EXTRACTION_NUMBERS; i++) {
+//                int nr = myNumbersMachine.nextInt(MAXVALUE) + 1;
+//                //check if nr is not already in the array, if it is generate a new one
+//                for (int j = 0; j < i; j++)
+//                    if (myNumbers[j] == nr) nr = myNumbersMachine.nextInt(MAXVALUE) + 1;
+//                myNumbers[i] = nr;
+//            }
+//            // here are my numbers
+//            System.out.println("here are my numbers:");
+//            for (int i = 0; i < MAX_EXTRACTION_NUMBERS; i++)
+//                System.out.print(myNumbers[i] + " |");
+//
+//            System.out.println("");
+//
+//
+//
+//
+//
+//            //compare and tell if won
+//
+//
+//
+//            for (int i = 0; i < MAX_EXTRACTION_NUMBERS; i++)
+//                for (int j = 0; j < MAX_EXTRACTION_NUMBERS; j++) {
+//
+//                    if (myNumbers[i] == sixGeneratedNumbers[j]) {
+//                        howManyWons++;
+//                        wonNumbers[howManyWons - 1] = sixGeneratedNumbers[j];
+//                    }
+//                }
+//
+//            switch (howManyWons) {
+//
+//                case 4: // that is 4 numbers
+//                    System.out.println("congrat, you won at 3rd category");
+//                    break;
+//                case 5: // that is 5 numbers
+//                    System.out.println("congrat, you won at 2rd category");
+//                    break;
+//                case 6: // that is 6 numbers
+//                    System.out.println("WOW, you won at 1st category");
+//                    break;
+//                default:
+//                    System.out.println("you are a looser, but keep trying, you guessed " + howManyWons + " numbers");
+//                    break;
+//            }
+//        tentatives++;
+//        }while(howManyWons < 5);
 
         long endTime = System.currentTimeMillis();
         long time = (endTime - starttime) / 1000;
 
-        if(howManyWons > 5) {
-            System.out.println("here is what you won: ");
-            for (int i = 0; i < MAX_EXTRACTION_NUMBERS; i++)
-                if (wonNumbers[i] != 0)
-                    System.out.print(wonNumbers[i] + " |");
-            System.out.println("Numar de incercari: " +tentatives);
-            System.out.println("Timp necesar: " +time);
-        }
+//        if(howManyWons > 5) {
+        System.out.println("here is what you won: ");
+        for (int i = 0; i < MAX_EXTRACTION_NUMBERS; i++)
+            if (wonNumbers[i] != 0)
+                System.out.print(wonNumbers[i] + " |");
+        System.out.println("Numar de incercari: " + tentatives);
+        System.out.println("Timp necesar: " + time);
+//        }
 
     }
 
     private static int[] extragereLoto6din49(Random lottoMachine) {
         int[] sixGeneratedNumbers = new int[MAX_EXTRACTION_NUMBERS];
-        for (int i = 0; i < MAX_EXTRACTION_NUMBERS; i++) {
-
-            int nr = lottoMachine.nextInt(MAXVALUE) + 1;
-
-            //check if nr is not already in the array, if it is generate a new one
-            for (int j = 0; j < i; j++)
-                if (sixGeneratedNumbers[j] == nr)
-                    nr = lottoMachine.nextInt(MAXVALUE) + 1;
-
-            sixGeneratedNumbers[i] = nr;
-
-            // wait , not necessary anyway
-            try {
-                Thread.currentThread().sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        int nr;
+        boolean sirBun;
+        do {
+            sirBun = true;
+            for (int i = 0; i < MAX_EXTRACTION_NUMBERS; i++) {
+                nr = lottoMachine.nextInt(MAXVALUE) + 1;
+                sixGeneratedNumbers[i] = nr;
             }
 
-        }
+            Arrays.sort(sixGeneratedNumbers);
+            for (int i = 0; i < sixGeneratedNumbers.length - 1; i++) {
+                if (sixGeneratedNumbers[i] == sixGeneratedNumbers[i + 1]) {
+                    sirBun = false;
+                }
 
+            }
+        } while (!sirBun);
         // 3 print the extraction
         System.out.println("here is the extraction today:");
         for (int i = 0; i < MAX_EXTRACTION_NUMBERS; i++)
